@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-}
+    reactStrictMode: true,
+    images: {
+        domains: ["firebasestorage.googleapis.com"],
+    },
+    i18n: {
+        locales: ["en"],
+        defaultLocale: "en",
+    },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
