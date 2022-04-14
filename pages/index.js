@@ -1,10 +1,16 @@
 import Head from "next/head";
+
+import { loadStripe } from "@stripe/stripe-js";
+
 import PageTitle from "../components/PageTitle/PageTitle";
 import ProductCard from "../components/ProductCard/ProductCard";
 import { pane } from "./../styles/home.module.scss";
 
 export default function Home(props) {
-    const products = props.products.slice(0, 3);  //change value to increase how many images you want to see on page
+    const products = props.products.slice(0, 3); //change value to increase how many images you want to see on page
+
+    const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+
     return (
         <>
             <Head>
@@ -34,7 +40,7 @@ export default function Home(props) {
 
 export async function getStaticProps() {
     const res = await fetch(
-        "https://storefront-55911-default-rtdb.firebaseio.com/products.json"
+        'https://storefront-55911-default-rtdb.firebaseio.com/products.json'
     );
     const productData = await res.json();
     const products = Object.values(productData);
@@ -43,7 +49,7 @@ export async function getStaticProps() {
             products,
         },
         revalidate: 60,
-    }
+    };
 }
 
 // https://storefront-55911-default-rtdb.firebaseio.com/products.json
